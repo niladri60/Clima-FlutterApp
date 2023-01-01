@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       theme: ThemeData.dark(),
-      home: LoadingScreen(),
+      home: const LoadingScreen(),
     );
   }
 }
