@@ -17,10 +17,17 @@ class LoadingScreenState extends State<LoadingScreen> {
   }
 
   Future<void> getLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    if (kDebugMode) {
-      print(position);
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.low);
+      if (kDebugMode) {
+        print(position);
+      }
+    }
+    catch(e){
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
