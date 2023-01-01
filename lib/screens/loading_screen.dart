@@ -10,12 +10,12 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class LoadingScreenState extends State<LoadingScreen> {
-
   @override
-  void initState(){
+  void initState() {
     super.initState();
     getLocation();
   }
+
   Future<void> getLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
@@ -26,6 +26,16 @@ class LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Image(
+            image: AssetImage('images/weather_icon.jpg'),
+          ),
+        ),
+      ),
+    );
   }
 }
