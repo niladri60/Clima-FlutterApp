@@ -32,25 +32,12 @@ class LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFC0EEE4),
+    return const Scaffold(
+      backgroundColor: Color(0xFFC0EEE4),
       body: Center(
-        child: Column(
-          children: const [
-            Padding(
-              padding: EdgeInsets.all(50.0),
-              child: Image(
-                image: AssetImage('images/weather_icon.jpg'),
-              ),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            SpinKitRing(
-              color: Colors.blue,
-              size: 80.0,
-            ),
-          ],
+        child: SpinKitRing(
+          color: Colors.blue,
+          size: 80.0,
         ),
       ),
     );

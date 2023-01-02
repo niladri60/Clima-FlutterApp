@@ -26,7 +26,7 @@ class WeatherModel {
     } else if (condition < 800) {
       return '🌫';
     } else if (condition == 800) {
-      return '☀️';
+      return 'c ⛅';
     } else if (condition <= 804) {
       return '☁️';
     } else {
