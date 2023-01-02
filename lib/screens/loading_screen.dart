@@ -1,7 +1,10 @@
+import 'package:clima/screens/location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/services/location.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+import 'package:clima/services/networking.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+const apiKey = 'a2b8ed23b446401728b0ea4960b0e00e';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -14,46 +17,45 @@ class LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    getLocation();
+    getLocationData();
   }
 
-  void getLocation() async {
+  void getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation();
-    print(location.latitude);
-    print(location.longitude);
-  }
+    NetworkHelper networkHelper = NetworkHelper(
+        'https://api.openweathermap.org/data/2.5/weather?lat=23.26&lon=88.43&appid=$apiKey&units=metric');
 
-  void getData() async {
-    Response response = await get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=23.26&lon=88.43&appid=a2b8ed23b446401728b0ea4960b0e00e'));
-    if (response.statusCode == 200) {
-      String data = response.body;
-      // print(data);
-      var temperature = jsonDecode(data)['main']['temp'];
-      print(temperature);
+    var weatherData = await networkHelper.getData();
 
-      var conditionNumber = jsonDecode(data)['weather'][0]['id'];
-      print(conditionNumber);
-
-      var cityName = jsonDecode(data)['name'];
-      print(cityName);
-    } else {
-      print(response.statusCode);
-    }
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return LocationScreen(
+        loactionWeather: weatherData,
+      );
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
-    getData();
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Image(
-            image: AssetImage('images/weather_icon.jpg'),
-          ),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(50.0),
+              child: Image(
+                image: AssetImage('images/weather_icon.jpg'),
+              ),
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            SpinKitRing(
+              color: Colors.blue,
+              size: 80.0,
+            ),
+          ],
         ),
       ),
     );
