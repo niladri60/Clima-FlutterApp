@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'package:clima/services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key, this.loactionWeather});
@@ -11,9 +12,12 @@ class LocationScreen extends StatefulWidget {
 }
 
 class LocationScreenState extends State<LocationScreen> {
+  WeatherModel weather = WeatherModel();
+
   int? temperature;
-  int? conditionNumber;
+  String? weatherIcon;
   String? cityName;
+  String? weatherMessage;
   @override
   void initState() {
     super.initState();
@@ -21,11 +25,14 @@ class LocationScreenState extends State<LocationScreen> {
   }
 
   void updateUI(dynamic weatherData) {
-    double temp = jsonDecode(weatherData)['main']['temp'];
-    temperature = temp.toInt();
-    conditionNumber = jsonDecode(weatherData)['weather'][0]['id'];
-    print(conditionNumber);
-    cityName = jsonDecode(weatherData)['name'];
+    setState(() {
+      double temp = jsonDecode(weatherData)['main']['temp'];
+      temperature = temp.toInt();
+      var conditionNumber = jsonDecode(weatherData)['weather'][0]['id'];
+      weatherIcon = weather.getWeatherIcon(conditionNumber!);
+      weatherMessage = weather.getMessage(temperature!);
+      cityName = jsonDecode(weatherData)['name'];
+    });
   }
 
   @override
@@ -74,7 +81,7 @@ class LocationScreenState extends State<LocationScreen> {
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      weatherIcon!,
                       style: kConditionTextStyle,
                     ),
                   ],
@@ -83,7 +90,7 @@ class LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: const EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in $cityName!",
+                  "$weatherMessage in $cityName!",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
