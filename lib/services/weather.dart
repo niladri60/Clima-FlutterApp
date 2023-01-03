@@ -24,21 +24,21 @@ class WeatherModel {
 
   String getWeatherIcon(int condition) {
     if (condition < 300) {
-      return '🌩';
+      return 'c🌩';
     } else if (condition < 400) {
-      return '🌧';
+      return 'c🌧';
     } else if (condition < 600) {
-      return '☔️';
+      return 'c☔️';
     } else if (condition < 700) {
-      return '☃️';
+      return 'c☃️';
     } else if (condition < 800) {
-      return '🌫';
+      return 'c🌫';
     } else if (condition == 800) {
       return 'c⛅';
     } else if (condition <= 804) {
-      return '☁️';
+      return 'c☁️';
     } else {
-      return '🤷‍';
+      return 'c🤷‍';
     }
   }
 

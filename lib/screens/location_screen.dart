@@ -6,7 +6,7 @@ import 'city_screen.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key, this.loactionWeather});
-  final loactionWeather;
+  final dynamic loactionWeather;
 
   @override
   LocationScreenState createState() => LocationScreenState();
