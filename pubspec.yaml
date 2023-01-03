@@ -35,5 +35,8 @@ flutter:
       fonts:
         - asset: fonts/SpartanMB-Black.otf
           weight: 900
+    - family: Noto Color Emoji
+      fonts:
+        - asset: fonts/NotoColorEmoji-Regular.ttf
 
 

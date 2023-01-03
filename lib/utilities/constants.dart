@@ -17,4 +17,5 @@ const kButtonTextStyle = TextStyle(
 
 const kConditionTextStyle = TextStyle(
   fontSize: 100.0,
+  fontFamily: 'Noto Color Emoji',
 );
