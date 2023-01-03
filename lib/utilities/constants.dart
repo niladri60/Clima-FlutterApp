@@ -20,11 +20,11 @@ const kConditionTextStyle = TextStyle(
   fontFamily: 'Noto Color Emoji',
 );
 
-const kTextFildInputDecoration = InputDecoration(
+const kTextFieldInputDecoration = InputDecoration(
   filled: true,
   fillColor: Colors.white,
   icon: Icon(
-    Icons.location_city,
+    Icons.search,
     color: Colors.white,
   ),
   hintText: 'Enter City name',

@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-import 'dart:convert';
 
 class NetworkHelper {
   NetworkHelper(this.url);
@@ -10,7 +10,9 @@ class NetworkHelper {
       String data = response.body;
       return data;
     } else {
-      print(response.statusCode);
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
     }
   }
 }
